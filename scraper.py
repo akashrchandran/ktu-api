@@ -28,8 +28,8 @@ def extract_attachments(soup):
 	attachments = []
 	for anchors in soup:
 		try:
-			title = anchors.get_text()
-			link = "https://ktu.edu.in/{}".format(re.sub(r'\s+', '', anchors['href']))
+			title = anchors.get_text().strip()
+			link = "https://ktu.edu.in/{}".format(re.sub(r'\s+', '', anchors['href'])) if anchors.has_attr('href') else anchors.get_text().strip()
 			attachments.append({'title': title, 'link': link})
 		except Exception as e:
 			return e
